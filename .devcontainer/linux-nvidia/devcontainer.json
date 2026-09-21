@@ -38,7 +38,8 @@
   },
   "remoteEnv": {
     "USERNAME": "${localEnv:USERNAME}",
-    "USERDNSDOMAIN": "${localEnv:USERDNSDOMAIN}"
+    "USERDNSDOMAIN": "${localEnv:USERDNSDOMAIN}",
+    "LMODULES": "${localEnv:LOADEDMODULES}"
   },
   "containerEnv": {
     "NVIDIA_VISIBLE_DEVICES": "all",

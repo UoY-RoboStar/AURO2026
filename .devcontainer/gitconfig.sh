@@ -22,7 +22,7 @@ if [ -z "$(git config user.email)" ]; then
         git config --global user.email "$(git config -f ~/homedir/AppData/Roaming/.gitconfig --get user.email)"
     else
         if [ -n "$USERNAME" ]; then
-           if [[ "$USERDNSDOMAIN" == "ITS.YORK.AC.UK" ]]; then
+           if [[ "$USERDNSDOMAIN" == "ITS.YORK.AC.UK" || "$LMODULES" == "its-net:its-hdd:cs-net:cs-hdd" ]]; then
                 echo "[INFO]: Configuring git user.email within container to '$USERNAME@york.ac.uk'"
                 git config --global user.email "$USERNAME@york.ac.uk"
             else
