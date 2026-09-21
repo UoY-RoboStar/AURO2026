@@ -1,0 +1,48 @@
+// Use this devcontainer.json to develop within a standard Docker environment,
+// with VNC providing the GUI support.
+// It uses the prebuilt image from the GitHub Container Registry,
+// so does not require a Dockerfile.
+{
+  "name": "auro-linux-nvidia",
+  "image": "ghcr.io/uoy-robostar/ros2-lyrical-tb3:latest",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/auro,type=bind",
+  "workspaceFolder": "/workspaces/auro",
+  "mounts": [
+    "source=${localEnv:HOME}${localEnv:USERPROFILE},target=/home/ubuntu/homedir,type=bind",
+    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind",
+    "source=${localEnv:HOME}/.Xauthority,target=/home/ubuntu/.Xauthority,type=bind",
+    // NVidia stuff
+    "source=/run/nvidia-persistenced/socket,target=/run/nvidia-persistenced/socket,type=bind",
+    "source=/usr/bin/nvidia-smi,target=/usr/bin/nvidia-smi,type=bind,readonly",
+    "source=/usr/bin/nvidia-persistenced,target=/usr/bin/nvidia-persistenced,type=bind,readonly",
+    "source=/etc/OpenCL/vendors/nvidia.icd,target=/etc/OpenCL/vendors/nvidia.icd,type=bind,readonly",
+    "source=/usr/share/glvnd/egl_vendor.d/10_nvidia.json,target=/usr/share/glvnd/egl_vendor.d/10_nvidia.json,type=bind,readonly",
+    "source=/usr/share/vulkan/icd.d/nvidia_icd.json,target=/etc/vulkan/icd.d/nvidia_icd.json,type=bind,readonly",
+    
+    // Mount the host library directory into a staging path inside the container
+    "source=/usr/lib/x86_64-linux-gnu,target=/host-nvidia-libs,type=bind,readonly"
+  ],
+  "postStartCommand": "sudo bash /workspaces/auro/.devcontainer/other/setup-nvidia-libs.sh ; /workspaces/auro/.devcontainer/other/fix-permissions.sh",
+  "runArgs": [
+    "--device", "/dev/nvidiactl",
+    "--device", "/dev/nvidia-uvm",
+    "--device", "/dev/nvidia-uvm-tools",
+    "--device", "/dev/nvidia-modeset",
+    "--device", "/dev/nvidia0"
+  ],
+  "remoteUser": "ubuntu",
+  "portsAttributes": {
+      "6080": {
+          "label": "Desktop"
+      }
+  },
+  "remoteEnv": {
+    "USERNAME": "${localEnv:USERNAME}",
+    "USERDNSDOMAIN": "${localEnv:USERDNSDOMAIN}"
+  },
+  "containerEnv": {
+    "NVIDIA_VISIBLE_DEVICES": "all",
+    "NVIDIA_DRIVER_CAPABILITIES": "graphics,utility,compute,display",
+    "DISPLAY": "${localEnv:DISPLAY}"
+  }
+}
