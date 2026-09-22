@@ -1,0 +1,36 @@
+// Use this devcontainer.json to develop within a standard Docker environment,
+// with VNC providing the GUI support.
+// It uses the prebuilt image from the GitHub Container Registry,
+// so does not require a Dockerfile.
+{
+  "name": "auro-linux-dri",
+  "image": "ghcr.io/uoy-robostar/ros2-lyrical-tb3/auro-dev:latest",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/auro,type=bind",
+  "workspaceFolder": "/workspaces/auro",
+  "mounts": [
+    "source=${localEnv:HOME}${localEnv:USERPROFILE},target=/home/ubuntu/homedir,type=bind",
+    "source=/tmp/.X11-unix,target=/tmp/.X11-unix-host,type=bind",
+    "source=${localEnv:HOME}/.Xauthority,target=/home/ubuntu/.Xauthority,type=bind"
+  ],
+  "postStartCommand": "DISP=\"${localEnv:DISPLAY:-:0}\" && NUM=$(echo \"$DISP\" | grep -oE '[0-9]+' | head -n1) && ln -sf \"/tmp/.X11-host/X$NUM\" \"/tmp/.X11-unix/X$NUM\"",
+  "runArgs": [
+    "--device", "/dev/dri"
+  ],
+  "remoteUser": "ubuntu",
+  "portsAttributes": {
+      "6080": {
+          "label": "Desktop"
+      }
+  },
+  "remoteEnv": {
+    "USERNAME": "${localEnv:USERNAME}",
+    "USERDNSDOMAIN": "${localEnv:USERDNSDOMAIN}",
+    "LMODULES": "${localEnv:LOADEDMODULES}",
+    "DISPLAY": "${localEnv:DISPLAY}"
+  },
+  "containerEnv": {
+    "NVIDIA_VISIBLE_DEVICES": "all",
+    "NVIDIA_DRIVER_CAPABILITIES": "graphics,utility,compute,display",
+    "DISPLAY": ":2"
+  }
+}

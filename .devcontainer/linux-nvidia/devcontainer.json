@@ -4,7 +4,7 @@
 // so does not require a Dockerfile.
 {
   "name": "auro-linux-nvidia",
-  "image": "ghcr.io/uoy-robostar/ros2-lyrical-tb3:latest",
+  "image": "ghcr.io/uoy-robostar/ros2-lyrical-tb3/auro-dev:latest",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/auro,type=bind",
   "workspaceFolder": "/workspaces/auro",
   "mounts": [
@@ -44,6 +44,9 @@
   "containerEnv": {
     "NVIDIA_VISIBLE_DEVICES": "all",
     "NVIDIA_DRIVER_CAPABILITIES": "graphics,utility,compute,display",
+    "DISPLAY": ":1"
+  },
+  "remoteEnv": {
     "DISPLAY": "${localEnv:DISPLAY}"
   }
 }

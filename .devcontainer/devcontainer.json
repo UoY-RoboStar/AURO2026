@@ -11,7 +11,7 @@
 // configurations can't be auto-selected and must be picked by hand.
 {
   "name": "auro-vnc",
-  "image": "ghcr.io/uoy-robostar/ros2-lyrical-tb3:latest",
+  "image": "ghcr.io/uoy-robostar/ros2-lyrical-tb3/auro-dev:latest",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/auro,type=bind",
   "workspaceFolder": "/workspaces/auro",
   "mounts": [
@@ -32,16 +32,7 @@
   "containerEnv": {
     "VNC_RESOLUTION": "1280x720x24",
     "GZ_PARTITION": "bridge",
-    "GZ_IP": "127.0.0.1"
-  },
-  "forwardPorts": [6080,5901],
-    "features": {
-        "ghcr.io/devcontainers/features/desktop-lite:1": {
-            "version": "latest",
-            "noVncVersion": "1.2.0",
-            "password": "vscode",
-            "webPort": "6080",
-            "vncPort": "5901"
-        }
-    }
+    "GZ_IP": "127.0.0.1",
+    "DISPLAY": ":1"
+  }
 }
