@@ -83,7 +83,7 @@ EOF
     # 2. Write containers.conf
     cat <<'EOF' > "$CONFIG_DIR/containers.conf"
 [containers]
-userns = "keep-id"
+userns = "keep-id:uid=1000,gid=1000"
 EOF
 
     # 3. Enable podman socket
