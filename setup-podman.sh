@@ -11,7 +11,7 @@
 #    shared by the host machine, including X11 and the network file share.
 #
 # 2. Configuring the file ~/.config/storage.conf, so that the graphroot, where 
-#    Podman stores images/volumes is /var/tmp/containers-storage-$USER.
+#    Podman stores images/volumes is /scratch/$USER/containers.
 #
 # 3. Enables podman's socket via a user-level systemd configuration, ie. by running:
 #       systemctl --user enable --now podman.socket
@@ -77,14 +77,13 @@ install_podman() {
     cat <<'EOF' > "$CONFIG_DIR/storage.conf"
 [storage]
 driver = "overlay"
-graphroot = "/var/tmp/containers-storage-$USER"
+graphroot = "/scratch/$USER/containers"
 EOF
 
     # 2. Write containers.conf
     cat <<'EOF' > "$CONFIG_DIR/containers.conf"
 [containers]
-userns = "keep-id:uid=1000,gid=1000"
-default_sysctls = []
+userns = "keep-id"
 EOF
 
     # 3. Enable podman socket
