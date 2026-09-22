@@ -84,6 +84,7 @@ EOF
     cat <<'EOF' > "$CONFIG_DIR/containers.conf"
 [containers]
 userns = "keep-id:uid=1000,gid=1000"
+default_sysctls = []
 EOF
 
     # 3. Enable podman socket
@@ -138,15 +139,15 @@ uninstall_podman() {
 
 verify_podman() {
     echo "Testing Podman configuration..."
-    
-    # Run container and check if UID inside equals host UID
-    CONTAINER_UID=$(podman run --rm alpine id -u 2>/dev/null || echo "failed")
-    HOST_UID=$(id -u)
 
-    if [ "$CONTAINER_UID" -eq "$HOST_UID" ]; then
-        echo "✅ Success: Podman is configured correctly (UID $CONTAINER_UID matched)."
+    # Check container UID (expects 1000 due to keep-id:uid=1000,gid=1000)
+    CONTAINER_UID=$(podman run --rm docker.io/library/alpine:latest id -u 2>/dev/null || echo "error")
+
+    if [ "$CONTAINER_UID" = "1000" ]; then
+        echo "✅ Success: Podman is configured correctly (Container UID is 1000)."
     else
-        echo "❌ Failure: User namespace mapping failed (Container UID: $CONTAINER_UID, Host UID: $HOST_UID)."
+        echo "❌ Failure: Test container failed. Run this command manually to inspect:"
+        echo "  podman run --rm docker.io/library/alpine:latest id -u"
     fi
 }
 
