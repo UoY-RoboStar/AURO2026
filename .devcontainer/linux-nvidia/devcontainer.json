@@ -1,7 +1,7 @@
-// Use this devcontainer.json to develop within a standard Docker environment,
-// with VNC providing the GUI support.
-// It uses the prebuilt image from the GitHub Container Registry,
-// so does not require a Dockerfile.
+// Use this devcontainer.json to develop within a standard environment,
+// with X11 forwarding via nvidia's proprietary drivers.
+//
+// It requires that ~/.Xauthority in the host points to $XAUTHORITY.
 {
   "name": "auro-linux-nvidia",
   "image": "ghcr.io/uoy-robostar/ros2-lyrical-tb3/auro-dev:latest",
@@ -22,7 +22,7 @@
     // Mount the host library directory into a staging path inside the container
     "source=/usr/lib/x86_64-linux-gnu,target=/host-nvidia-libs,type=bind,readonly"
   ],
-  "postStartCommand": "sudo bash /workspaces/auro/.devcontainer/other/setup-nvidia-libs.sh ; /workspaces/auro/.devcontainer/other/fix-permissions.sh",
+  "postStartCommand": "/workspaces/${localWorkspaceFolderBasename}/.devcontainer/config.sh ; sudo bash /workspaces/${localWorkspaceFolderBasename}/.devcontainer/linux-nvidia/setup-nvidia-libs.sh ; /workspaces/${localWorkspaceFolderBasename}/.devcontainer/linux-nvidia/fix-permissions.sh",
   "runArgs": [
     "--device", "/dev/nvidiactl",
     "--device", "/dev/nvidia-uvm",

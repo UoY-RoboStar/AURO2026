@@ -1,14 +1,11 @@
 // Use this devcontainer.json to develop within a standard Docker environment,
 // with VNC providing the GUI support.
-// It uses the prebuilt image from the GitHub Container Registry,
-// so does not require a Dockerfile.
 //
 // This is the default configuration: it needs no host-side GPU/X11 detection
 // (VNC's desktop and X server run inside the container, exposed over
-// http://localhost:6080/), so unlike the wsl/ and other/ configurations it
+// http://localhost:6080/), so unlike the wsl/ and linux-dri/ configurations it
 // works unmodified under "Dev Containers: Clone Repository in Container
-// Volume" as well as a normal local clone. See NOTES.md for why the other
-// configurations can't be auto-selected and must be picked by hand.
+// Volume" as well as a normal local clone.
 {
   "name": "auro-vnc",
   "image": "ghcr.io/uoy-robostar/ros2-lyrical-tb3/auro-dev:latest",
@@ -23,7 +20,7 @@
           "label": "Desktop"
       }
   },
-  "postStartCommand": "touch /workspaces/.bash_history && ln -sf /workspaces/.bash_history /home/ubuntu/.bash_history ; /workspaces/${localWorkspaceFolderBasename}/.devcontainer/gitconfig.sh",
+  "postStartCommand": "/workspaces/${localWorkspaceFolderBasename}/.devcontainer/config.sh",
   "remoteEnv": {
     "USERNAME": "${localEnv:USERNAME}",
     "USERDNSDOMAIN": "${localEnv:USERDNSDOMAIN}",
@@ -33,6 +30,6 @@
     "VNC_RESOLUTION": "1280x720x24",
     "GZ_PARTITION": "bridge",
     "GZ_IP": "127.0.0.1",
-    "DISPLAY": ":1"
+    "DISPLAY": ":2" // We set the built-in X11/vnc to use display 2 by default.
   }
 }

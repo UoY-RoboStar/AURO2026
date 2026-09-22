@@ -1,7 +1,8 @@
-// Use this devcontainer.json to develop within a standard Docker environment,
-// with VNC providing the GUI support.
-// It uses the prebuilt image from the GitHub Container Registry,
-// so does not require a Dockerfile.
+// Use this devcontainer.json to develop within a standard environment,
+// with X11 forwarding via /dev/dri. This is compatible with Intel/AMD cards and
+// the open-source nvidia driver.
+//
+// It requires that ~/.Xauthority in the host points to $XAUTHORITY.
 {
   "name": "auro-linux-dri",
   "image": "ghcr.io/uoy-robostar/ros2-lyrical-tb3/auro-dev:latest",
@@ -12,7 +13,7 @@
     "source=/tmp/.X11-unix,target=/tmp/.X11-host,type=bind",
     "source=${localEnv:HOME}/.Xauthority,target=/home/ubuntu/.Xauthority,type=bind"
   ],
-  "postStartCommand": "DISP=\"${localEnv:DISPLAY:-:0}\" && NUM=$(echo \"$DISP\" | grep -oE '[0-9]+' | head -n1) && ln -sf \"/tmp/.X11-host/X$NUM\" \"/tmp/.X11-unix/X$NUM\"",
+  "postStartCommand": "DISP=\"${localEnv:DISPLAY:-:0}\" && NUM=$(echo \"$DISP\" | grep -oE '[0-9]+' | head -n1) && ln -sf \"/tmp/.X11-host/X$NUM\" \"/tmp/.X11-unix/X$NUM\" ; /workspaces/${localWorkspaceFolderBasename}/.devcontainer/config.sh",
   "runArgs": [
     "--device", "/dev/dri"
   ],
@@ -29,8 +30,7 @@
     "DISPLAY": "${localEnv:DISPLAY}"
   },
   "containerEnv": {
-    "NVIDIA_VISIBLE_DEVICES": "all",
-    "NVIDIA_DRIVER_CAPABILITIES": "graphics,utility,compute,display",
+    // We set the built-in X11/vnc to use display 2 by default.
     "DISPLAY": ":2"
   }
 }

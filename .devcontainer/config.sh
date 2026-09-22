@@ -1,4 +1,6 @@
 #!/bin/bash
+touch /workspaces/.bash_history && ln -sf /workspaces/.bash_history /home/ubuntu/.bash_history 
+
 # Bash script to configure git user name/email within the Dev Container based
 # on either environment variables passed or .gitconfig under ~/homedir/AppData/Roaming/.gitconfig.
 

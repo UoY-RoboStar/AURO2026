@@ -114,6 +114,8 @@ EOF
     fi
 
     echo "Podman configuration installed successfully."
+
+    verify_podman
 }
 
 uninstall_podman() {
@@ -132,6 +134,20 @@ uninstall_podman() {
     rmdir "$AUTOSTART_DIR" 2>/dev/null || true
 
     echo "Podman configuration uninstalled successfully."
+}
+
+verify_podman() {
+    echo "Testing Podman configuration..."
+    
+    # Run container and check if UID inside equals host UID
+    CONTAINER_UID=$(podman run --rm alpine id -u 2>/dev/null || echo "failed")
+    HOST_UID=$(id -u)
+
+    if [ "$CONTAINER_UID" -eq "$HOST_UID" ]; then
+        echo "✅ Success: Podman is configured correctly (UID $CONTAINER_UID matched)."
+    else
+        echo "❌ Failure: User namespace mapping failed (Container UID: $CONTAINER_UID, Host UID: $HOST_UID)."
+    fi
 }
 
 case "${1:-}" in
