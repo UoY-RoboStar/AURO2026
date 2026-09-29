@@ -12,7 +12,7 @@
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/auro,type=bind",
   "workspaceFolder": "/workspaces/auro",
   "mounts": [
-    "source=${localEnv:HOME}${localEnv:USERPROFILE},target=/home/ubuntu/homedir,type=bind,bind-propagation=rslave"
+    "source=${localEnv:HOME}${localEnv:USERPROFILE},target=/home/ubuntu/homedir,type=bind"
   ],
   "remoteUser": "ubuntu",
   "portsAttributes": {
