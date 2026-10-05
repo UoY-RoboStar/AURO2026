@@ -31,6 +31,6 @@
     "GZ_PARTITION": "bridge",
     "GZ_IP": "127.0.0.1",
     "QT_QPA_PLATFORM": "xcb",
-    "DISPLAY": ":2" // We set the built-in X11/vnc to use display 2 by default.
+    "DISPLAY": ":4" // We set the built-in X11/vnc to use display 4 by default.
   }
 }

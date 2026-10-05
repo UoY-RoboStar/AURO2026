@@ -9,7 +9,7 @@
   "workspaceFolder": "/workspaces/auro",
   "mounts": [
     "source=${localEnv:HOME}${localEnv:USERPROFILE},target=/home/ubuntu/homedir,type=bind",
-    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind",
+    "source=/tmp/.X11-unix,target=/tmp/.X11-host,type=bind",
     "source=${localEnv:HOME}/.Xauthority,target=/home/ubuntu/.Xauthority,type=bind",
     // NVidia stuff
     "source=/run/nvidia-persistenced/socket,target=/run/nvidia-persistenced/socket,type=bind",
@@ -22,8 +22,9 @@
     // Mount the host library directory into a staging path inside the container
     "source=/usr/lib/x86_64-linux-gnu,target=/host-nvidia-libs,type=bind,readonly"
   ],
-  "postStartCommand": "/workspaces/${localWorkspaceFolderBasename}/.devcontainer/config.sh ; sudo bash /workspaces/${localWorkspaceFolderBasename}/.devcontainer/linux-nvidia/setup-nvidia-libs.sh ; /workspaces/${localWorkspaceFolderBasename}/.devcontainer/linux-nvidia/fix-permissions.sh",
+  "postStartCommand": "DISP=\"${localEnv:DISPLAY:-:0}\" && NUM=$(echo \"$DISP\" | grep -oE '[0-9]+' | head -n1) && ln -sf \"/tmp/.X11-host/X$NUM\" \"/tmp/.X11-unix/X$NUM\" ; /workspaces/${localWorkspaceFolderBasename}/.devcontainer/config.sh ; sudo bash /workspaces/${localWorkspaceFolderBasename}/.devcontainer/linux-nvidia/setup-nvidia-libs.sh",
   "runArgs": [
+    "--device", "/dev/dri",
     "--device", "/dev/nvidiactl",
     "--device", "/dev/nvidia-uvm",
     "--device", "/dev/nvidia-uvm-tools",
@@ -39,14 +40,13 @@
   "remoteEnv": {
     "USERNAME": "${localEnv:USERNAME}",
     "USERDNSDOMAIN": "${localEnv:USERDNSDOMAIN}",
-    "LMODULES": "${localEnv:LOADEDMODULES}"
+    "LMODULES": "${localEnv:LOADEDMODULES}",
+    "DISPLAY": "${localEnv:DISPLAY}",
+    "QT_QPA_PLATFORM": "xcb"
   },
   "containerEnv": {
     "NVIDIA_VISIBLE_DEVICES": "all",
     "NVIDIA_DRIVER_CAPABILITIES": "graphics,utility,compute,display",
-    "DISPLAY": ":1"
-  },
-  "remoteEnv": {
-    "DISPLAY": "${localEnv:DISPLAY}"
+    "DISPLAY": ":4"
   }
 }
