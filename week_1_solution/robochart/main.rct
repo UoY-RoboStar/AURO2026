@@ -1,0 +1,31 @@
+
+interface IOperations {
+	cmd_vel (  msg : Twist )
+}
+
+interface IEvents {
+	event scan : Seq( real )
+}
+
+robotic platform TurtleBot {
+	uses IEvents 
+	provides IOperations 
+}
+
+type Header
+
+datatype Twist { 
+	linear : Vector3 
+	angular : Vector3
+} 
+
+datatype TwistStamped { 
+	header : Header
+	twist : Twist
+}
+
+datatype Vector3 { 
+	x : real 
+	y : real 
+	z : real
+}
