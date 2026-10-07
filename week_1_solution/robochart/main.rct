@@ -1,6 +1,6 @@
 
 interface IOperations {
-	cmd_vel (  msg : Twist )
+	cmd_vel (   msg : TwistStamped )
 }
 
 interface IEvents {
