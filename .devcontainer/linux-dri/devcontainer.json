@@ -13,7 +13,7 @@
     "source=/tmp/.X11-unix,target=/tmp/.X11-host,type=bind",
     "source=${localEnv:HOME}/.Xauthority,target=/home/ubuntu/.Xauthority,type=bind"
   ],
-  "postStartCommand": "DISP=\"${localEnv:DISPLAY:-:0}\" && NUM=$(echo \"$DISP\" | grep -oE '[0-9]+' | head -n1) && ln -sf \"/tmp/.X11-host/X$NUM\" \"/tmp/.X11-unix/X$NUM\" ; /workspaces/${localWorkspaceFolderBasename}/.devcontainer/config.sh",
+  "postStartCommand": "DISP=\"${localEnv:DISPLAY:-:0}\" && NUM=$(echo \"$DISP\" | grep -oE '[0-9]+' | head -n1) && ln -sf \"/tmp/.X11-host/X$NUM\" \"/tmp/.X11-unix/X$NUM\" ; ${containerWorkspaceFolder}/.devcontainer/config.sh",
   "runArgs": [
     "--device", "/dev/dri"
   ],

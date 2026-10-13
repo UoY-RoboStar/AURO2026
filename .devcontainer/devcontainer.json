@@ -20,7 +20,7 @@
           "label": "Desktop"
       }
   },
-  "postStartCommand": "/workspaces/${localWorkspaceFolderBasename}/.devcontainer/config.sh",
+  "postStartCommand": "${containerWorkspaceFolder}/.devcontainer/config.sh",
   "remoteEnv": {
     "USERNAME": "${localEnv:USERNAME}",
     "USERDNSDOMAIN": "${localEnv:USERDNSDOMAIN}",
