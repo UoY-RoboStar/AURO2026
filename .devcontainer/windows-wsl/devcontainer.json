@@ -19,7 +19,7 @@
     "source=/run/desktop/mnt/host/wslg/.X11-unix,target=/tmp/.X11-unix,type=bind,readonly"
   ],
   "remoteUser": "ubuntu",
-  "postStartCommand": "/workspaces/${localWorkspaceFolderBasename}/.devcontainer/config.sh",
+  "postStartCommand": "${containerWorkspaceFolder}/.devcontainer/config.sh",
   "remoteEnv": {
     "USERNAME": "${localEnv:USERNAME}",
     "USERDNSDOMAIN": "${localEnv:USERDNSDOMAIN}"
