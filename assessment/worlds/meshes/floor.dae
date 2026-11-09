@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><contributor><authoring_tool>floor from floor.scad env(), metres, 0.2 m per SCAD unit</authoring_tool></contributor>
+    <created>2026-09-16T00:00:00</created><modified>2026-09-16T00:00:00</modified>
+    <unit name="meter" meter="1"/><up_axis>Z_UP</up_axis></asset>
+  <library_images><image id="concrete-img" name="concrete"><init_from>concrete_tileable.jpg</init_from></image></library_images>
+  <library_effects><effect id="concrete-fx"><profile_COMMON>
+    <newparam sid="concrete-surface"><surface type="2D"><init_from>concrete-img</init_from></surface></newparam>
+    <newparam sid="concrete-sampler"><sampler2D><source>concrete-surface</source><wrap_s>WRAP</wrap_s><wrap_t>WRAP</wrap_t><minfilter>LINEAR_MIPMAP_LINEAR</minfilter><magfilter>LINEAR</magfilter></sampler2D></newparam>
+    <technique sid="common"><lambert>
+      <diffuse><texture texture="concrete-sampler" texcoord="UVMap"/></diffuse>
+    </lambert></technique></profile_COMMON></effect></library_effects>
+  <library_materials><material id="concrete-mat" name="concrete"><instance_effect url="#concrete-fx"/></material></library_materials>
+  <library_geometries><geometry id="floor-mesh" name="floor"><mesh>
+    <source id="floor-pos"><float_array id="floor-pos-arr" count="192">-29.5 -25.4 0.2 29.5 -25.4 0.2 29.5 -6 0.2 -29.5 -6 0.2 -29.5 -25.4 0 -29.5 -6 0 29.5 -6 0 29.5 -25.4 0 -29.5 6 0.2 29.5 6 0.2 29.5 25.4 0.2 -29.5 25.4 0.2 -29.5 6 0 -29.5 25.4 0 29.5 25.4 0 29.5 6 0 -29.5 -6 0.2 -19.5 -6 0.2 -19.5 6 0.2 -29.5 6 0.2 -29.5 -6 0 -29.5 6 0 -19.5 6 0 -19.5 -6 0 19.5 -6 0.2 29.5 -6 0.2 29.5 6 0.2 19.5 6 0.2 19.5 -6 0 19.5 6 0 29.5 6 0 29.5 -6 0 -29.5 -25.4 0 29.5 -25.4 0 29.5 -25.4 0.2 -29.5 -25.4 0.2 29.5 -25.4 0 29.5 25.4 0 29.5 25.4 0.2 29.5 -25.4 0.2 29.5 25.4 0 -29.5 25.4 0 -29.5 25.4 0.2 29.5 25.4 0.2 -29.5 25.4 0 -29.5 -25.4 0 -29.5 -25.4 0.2 -29.5 25.4 0.2 19.5 -6 0 -19.5 -6 0 -19.5 -6 0.2 19.5 -6 0.2 19.5 6 0 19.5 -6 0 19.5 -6 0.2 19.5 6 0.2 -19.5 6 0 19.5 6 0 19.5 6 0.2 -19.5 6 0.2 -19.5 -6 0 -19.5 6 0 -19.5 6 0.2 -19.5 -6 0.2</float_array>
+      <technique_common><accessor source="#floor-pos-arr" count="64" stride="3"><param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/></accessor></technique_common></source>
+    <source id="floor-nrm"><float_array id="floor-nrm-arr" count="48">0 0 1 0 0 -1 0 0 1 0 0 -1 0 0 1 0 0 -1 0 0 1 0 0 -1 0 -1 0 1 -0 0 0 1 0 -1 -0 0 -0 1 0 -1 0 0 -0 -1 0 1 0 0</float_array>
+      <technique_common><accessor source="#floor-nrm-arr" count="16" stride="3"><param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/></accessor></technique_common></source>
+    <source id="floor-uv"><float_array id="floor-uv-arr" count="128">-19.6667 -25.2866 19.6667 -25.2866 19.6667 -5.97321 -19.6667 -5.97321 -19.6667 -25.2866 -19.6667 -5.97321 19.6667 -5.97321 19.6667 -25.2866 -19.6667 5.97321 19.6667 5.97321 19.6667 25.2866 -19.6667 25.2866 -19.6667 5.97321 -19.6667 25.2866 19.6667 25.2866 19.6667 5.97321 -19.6667 -5.97321 -13 -5.97321 -13 5.97321 -19.6667 5.97321 -19.6667 -5.97321 -19.6667 5.97321 -13 5.97321 -13 -5.97321 13 -5.97321 19.6667 -5.97321 19.6667 5.97321 13 5.97321 13 -5.97321 13 5.97321 19.6667 5.97321 19.6667 -5.97321 0 0 39.3333 0 39.3333 0.199107 0 0.199107 0 0 33.8667 0 33.8667 0.199107 0 0.199107 0 0 -39.3333 0 -39.3333 0.199107 0 0.199107 0 0 -33.8667 0 -33.8667 0.199107 0 0.199107 26 0 0 0 0 0.199107 26 0.199107 8 0 0 0 0 0.199107 8 0.199107 -26 0 0 0 0 0.199107 -26 0.199107 -8 0 0 0 0 0.199107 -8 0.199107</float_array>
+      <technique_common><accessor source="#floor-uv-arr" count="64" stride="2"><param name="S" type="float"/><param name="T" type="float"/></accessor></technique_common></source>
+    <vertices id="floor-vtx"><input semantic="POSITION" source="#floor-pos"/></vertices>
+    <triangles material="concrete-sym" count="32">
+      <input semantic="VERTEX" source="#floor-vtx" offset="0"/>
+      <input semantic="NORMAL" source="#floor-nrm" offset="1"/>
+      <input semantic="TEXCOORD" source="#floor-uv" offset="2" set="0"/>
+      <p>0 0 0 1 0 1 2 0 2 0 0 0 2 0 2 3 0 3 4 1 4 5 1 5 6 1 6 4 1 4 6 1 6 7 1 7 8 2 8 9 2 9 10 2 10 8 2 8 10 2 10 11 2 11 12 3 12 13 3 13 14 3 14 12 3 12 14 3 14 15 3 15 16 4 16 17 4 17 18 4 18 16 4 16 18 4 18 19 4 19 20 5 20 21 5 21 22 5 22 20 5 20 22 5 22 23 5 23 24 6 24 25 6 25 26 6 26 24 6 24 26 6 26 27 6 27 28 7 28 29 7 29 30 7 30 28 7 28 30 7 30 31 7 31 32 8 32 33 8 33 34 8 34 32 8 32 34 8 34 35 8 35 36 9 36 37 9 37 38 9 38 36 9 36 38 9 38 39 9 39 40 10 40 41 10 41 42 10 42 40 10 40 42 10 42 43 10 43 44 11 44 45 11 45 46 11 46 44 11 44 46 11 46 47 11 47 48 12 48 49 12 49 50 12 50 48 12 48 50 12 50 51 12 51 52 13 52 53 13 53 54 13 54 52 13 52 54 13 54 55 13 55 56 14 56 57 14 57 58 14 58 56 14 56 58 14 58 59 14 59 60 15 60 61 15 61 62 15 62 60 15 60 62 15 62 63 15 63</p></triangles>
+  </mesh></geometry></library_geometries>
+  <library_visual_scenes><visual_scene id="Scene" name="Scene"><node id="floor" name="floor">
+    <instance_geometry url="#floor-mesh"><bind_material><technique_common>
+      <instance_material symbol="concrete-sym" target="#concrete-mat"><bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/></instance_material>
+    </technique_common></bind_material></instance_geometry></node></visual_scene></library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

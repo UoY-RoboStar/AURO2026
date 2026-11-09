@@ -1,0 +1,12 @@
+# Added on top of the Nav2 parameters when launching with keepout_mask:=<mask.yaml>
+global_costmap:
+  global_costmap:
+    ros__parameters:
+      keepout_filter:
+        enabled: true
+
+local_costmap:
+  local_costmap:
+    ros__parameters:
+      keepout_filter:
+        enabled: true

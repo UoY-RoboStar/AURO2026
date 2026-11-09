@@ -1,0 +1,48 @@
+# ros_gz_bridge entries for the crane (winch attacher and brake services, winch camera info, joint
+# states).
+# Its joints are commanded through ros2_control: see config/crane_controllers.yaml.
+#
+# ros2 service call /crane/winch/attach ros_gz_interfaces/srv/ControlWorld "{}"
+# ros2 service call /crane/winch/detach ros_gz_interfaces/srv/ControlWorld "{}"
+#
+# ControlWorld is used only because ros_gz_bridge can bridge it: the request is ignored and
+# `success` says whether the attach/detach happened (reasons are in the Gazebo log).
+- service_name: /crane/winch/attach
+  ros_type_name: ros_gz_interfaces/srv/ControlWorld
+  gz_req_type_name: gz.msgs.WorldControl
+  gz_rep_type_name: gz.msgs.Boolean
+- service_name: /crane/winch/detach
+  ros_type_name: ros_gz_interfaces/srv/ControlWorld
+  gz_req_type_name: gz.msgs.WorldControl
+  gz_rep_type_name: gz.msgs.Boolean
+# The winch's brake, on from the start: release it once the winch's effort holds it up.
+# ros2 service call /crane/winch/brake/release ros_gz_interfaces/srv/ControlWorld "{}"
+# ros2 service call /crane/winch/brake/engage ros_gz_interfaces/srv/ControlWorld "{}"
+- service_name: /crane/winch/brake/engage
+  ros_type_name: ros_gz_interfaces/srv/ControlWorld
+  gz_req_type_name: gz.msgs.WorldControl
+  gz_rep_type_name: gz.msgs.Boolean
+- service_name: /crane/winch/brake/release
+  ros_type_name: ros_gz_interfaces/srv/ControlWorld
+  gz_req_type_name: gz.msgs.WorldControl
+  gz_rep_type_name: gz.msgs.Boolean
+# Winch camera: the image itself is bridged by ros_gz_image's image_bridge (see assessment.launch.py),
+# so that image_transport offers /crane/winch_camera/image/{compressed,theora,zstd} as well as raw.
+- ros_topic_name: /crane/winch_camera/camera_info
+  gz_topic_name: /crane/winch_camera/camera_info
+  ros_type_name: sensor_msgs/msg/CameraInfo
+  gz_type_name: gz.msgs.CameraInfo
+  direction: GZ_TO_ROS
+# Crane joint positions (bridge_slide, winch_block_slide, winch_lift, and the fixed rail mounts),
+# from the JointStatePublisher system on the crane in assessment.world
+- ros_topic_name: /crane/joint_states
+  gz_topic_name: /crane/joint_states
+  ros_type_name: sensor_msgs/msg/JointState
+  gz_type_name: gz.msgs.Model
+  direction: GZ_TO_ROS
+# Which link the winch holds; only published if <publish_state> is true in assessment.world.
+# - ros_topic_name: /crane/winch/state
+#   gz_topic_name: /crane/winch/state
+#   ros_type_name: std_msgs/msg/String
+#   gz_type_name: gz.msgs.StringMsg
+#   direction: GZ_TO_ROS

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><contributor><authoring_tool>fuel_cell.stl (OpenSCAD), 50 units = 10 m</authoring_tool></contributor>
+    <created>2026-09-16T00:00:00</created><modified>2026-09-16T00:00:00</modified>
+    <unit name="meter" meter="1"/><up_axis>Z_UP</up_axis></asset>
+  <library_effects><effect id="fuel_cell-fx"><profile_COMMON><technique sid="common"><phong>
+    <ambient><color sid="ambient">0.3 0.3 1 1</color></ambient>
+    <diffuse><color sid="diffuse">0.3 0.3 1 1</color></diffuse>
+    <specular><color sid="specular">0.2 0.2 0.2 1</color></specular>
+    <shininess><float sid="shininess">20</float></shininess>
+  </phong></technique></profile_COMMON></effect></library_effects>
+  <library_materials><material id="fuel_cell-mat" name="fuel_cell_material"><instance_effect url="#fuel_cell-fx"/></material></library_materials>
+  <library_geometries><geometry id="fuel_cell-mesh" name="fuel_cell"><mesh>
+    <source id="fuel_cell-pos"><float_array id="fuel_cell-pos-arr" count="48">-0.4 -0.4 0.19 -0.4 -0.4 4 0.4 -0.4 0.19 -0.5 -0.5 0 -0.5 -0.5 4 -0.5 0.5 4 -0.4 0.4 4 0.5 -0.5 4 0.4 -0.4 4 -0.5 0.5 0 -0.4 0.4 0.19 0.5 0.5 0 0.4 0.4 0.19 0.4 0.4 4 0.5 0.5 4 0.5 -0.5 0</float_array><technique_common><accessor source="#fuel_cell-pos-arr" count="16" stride="3"><param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/></accessor></technique_common></source>
+    <source id="fuel_cell-nrm"><float_array id="fuel_cell-nrm-arr" count="18">0 1 0 -1 0 0 1 0 0 0 0 1 0 -1 0 0 0 -1</float_array><technique_common><accessor source="#fuel_cell-nrm-arr" count="6" stride="3"><param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/></accessor></technique_common></source>
+    <vertices id="fuel_cell-vtx"><input semantic="POSITION" source="#fuel_cell-pos"/></vertices>
+    <triangles material="fuel_cell-sym" count="28">
+      <input semantic="VERTEX" source="#fuel_cell-vtx" offset="0"/>
+      <input semantic="NORMAL" source="#fuel_cell-nrm" offset="1"/>
+      <p>0 0 1 0 2 0 3 1 4 1 5 1 0 2 6 2 1 2 4 3 1 3 6 3 3 4 7 4 4 4 4 3 8 3 1 3 3 1 5 1 9 1 0 2 10 2 6 2 3 5 9 5 11 5 0 3 12 3 10 3 9 0 5 0 11 0 4 3 6 3 5 3 10 4 13 4 6 4 5 3 6 3 14 3 3 4 15 4 7 4 0 3 2 3 12 3 3 5 11 5 15 5 2 1 8 1 12 1 15 2 11 2 7 2 2 0 1 0 8 0 4 3 7 3 8 3 7 3 14 3 8 3 10 4 12 4 13 4 5 0 14 0 11 0 14 3 6 3 13 3 12 1 8 1 13 1 7 2 11 2 14 2 14 3 13 3 8 3</p></triangles>
+  </mesh></geometry></library_geometries>
+  <library_visual_scenes><visual_scene id="Scene" name="Scene"><node id="fuel_cell" name="fuel_cell">
+    <instance_geometry url="#fuel_cell-mesh"><bind_material><technique_common>
+      <instance_material symbol="fuel_cell-sym" target="#fuel_cell-mat"/>
+    </technique_common></bind_material></instance_geometry></node></visual_scene></library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

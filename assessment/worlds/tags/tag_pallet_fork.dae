@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><contributor><authoring_tool>ArUco DICT_4X4_50 id 7 = pallet_fork</authoring_tool></contributor>
+    <created>2026-11-06T00:00:00</created><modified>2026-11-06T00:00:00</modified>
+    <unit name="meter" meter="1"/><up_axis>Z_UP</up_axis></asset>
+  <library_images><image id="tag_pallet_fork-img" name="tag_pallet_fork"><init_from>tag_pallet_fork.png</init_from></image></library_images>
+  <library_effects><effect id="tag_pallet_fork-fx"><profile_COMMON>
+    <newparam sid="tag_pallet_fork-surface"><surface type="2D"><init_from>tag_pallet_fork-img</init_from></surface></newparam>
+    <newparam sid="tag_pallet_fork-sampler"><sampler2D><source>tag_pallet_fork-surface</source><wrap_s>CLAMP_TO_EDGE</wrap_s><wrap_t>CLAMP_TO_EDGE</wrap_t><minfilter>LINEAR_MIPMAP_LINEAR</minfilter><magfilter>LINEAR</magfilter></sampler2D></newparam>
+    <technique sid="common"><lambert>
+      <diffuse><texture texture="tag_pallet_fork-sampler" texcoord="UVMap"/></diffuse>
+    </lambert></technique></profile_COMMON></effect></library_effects>
+  <library_materials><material id="tag_pallet_fork-mat" name="tag_pallet_fork"><instance_effect url="#tag_pallet_fork-fx"/></material></library_materials>
+  <library_geometries><geometry id="tag_pallet_fork-mesh" name="tag_pallet_fork"><mesh>
+    <source id="tag_pallet_fork-pos"><float_array id="tag_pallet_fork-pos-arr" count="24">0 -0.15 -0.18 0 0.15 -0.18 0 0.15 0.18 0 -0.15 0.18 -0.01 -0.15 0.18 -0.01 0.15 0.18 -0.01 0.15 -0.18 -0.01 -0.15 -0.18</float_array><technique_common><accessor source="#tag_pallet_fork-pos-arr" count="8" stride="3"><param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/></accessor></technique_common></source>
+    <source id="tag_pallet_fork-nrm"><float_array id="tag_pallet_fork-nrm-arr" count="18">1 0 0 -1 0 0 0 0 -1 0 0 1 0 1 0 0 -1 0</float_array><technique_common><accessor source="#tag_pallet_fork-nrm-arr" count="6" stride="3"><param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/></accessor></technique_common></source>
+    <source id="tag_pallet_fork-uv"><float_array id="tag_pallet_fork-uv-arr" count="10">0 0 1 0 1 1 0 1 0.012 0.988</float_array><technique_common><accessor source="#tag_pallet_fork-uv-arr" count="5" stride="2"><param name="S" type="float"/><param name="T" type="float"/></accessor></technique_common></source>
+    <vertices id="tag_pallet_fork-vtx"><input semantic="POSITION" source="#tag_pallet_fork-pos"/></vertices>
+    <triangles material="tag_pallet_fork-sym" count="12">
+      <input semantic="VERTEX" source="#tag_pallet_fork-vtx" offset="0"/>
+      <input semantic="NORMAL" source="#tag_pallet_fork-nrm" offset="1"/>
+      <input semantic="TEXCOORD" source="#tag_pallet_fork-uv" offset="2" set="0"/>
+      <p>0 0 0 1 0 1 2 0 2 0 0 0 2 0 2 3 0 3 4 1 4 5 1 4 6 1 4 4 1 4 6 1 4 7 1 4 0 2 4 7 2 4 6 2 4 0 2 4 6 2 4 1 2 4 3 3 4 2 3 4 5 3 4 3 3 4 5 3 4 4 3 4 1 4 4 6 4 4 5 4 4 1 4 4 5 4 4 2 4 4 0 5 4 3 5 4 4 5 4 0 5 4 4 5 4 7 5 4</p></triangles>
+  </mesh></geometry></library_geometries>
+  <library_visual_scenes><visual_scene id="Scene" name="Scene"><node id="tag_pallet_fork" name="tag_pallet_fork">
+    <instance_geometry url="#tag_pallet_fork-mesh"><bind_material><technique_common>
+      <instance_material symbol="tag_pallet_fork-sym" target="#tag_pallet_fork-mat"><bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/></instance_material>
+    </technique_common></bind_material></instance_geometry></node></visual_scene></library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

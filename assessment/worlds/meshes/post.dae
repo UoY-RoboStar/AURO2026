@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><contributor><authoring_tool>post.stl (OpenSCAD), 50 units = 10 m, yellow</authoring_tool></contributor>
+    <created>2026-09-16T00:00:00</created><modified>2026-09-16T00:00:00</modified>
+    <unit name="meter" meter="1"/><up_axis>Z_UP</up_axis></asset>
+  <library_effects><effect id="yellow-fx"><profile_COMMON><technique sid="common"><phong>
+    <ambient><color sid="ambient">1 0.85 0 1</color></ambient>
+    <diffuse><color sid="diffuse">1 0.85 0 1</color></diffuse>
+    <specular><color sid="specular">0.2 0.2 0.2 1</color></specular>
+    <shininess><float sid="shininess">20</float></shininess>
+  </phong></technique></profile_COMMON></effect></library_effects>
+  <library_materials><material id="yellow-mat" name="yellow"><instance_effect url="#yellow-fx"/></material></library_materials>
+  <library_geometries><geometry id="post-mesh" name="post"><mesh>
+    <source id="post-pos"><float_array id="post-pos-arr" count="24">0 0.2 2 0.2 0 2 0.2 0.2 2 0 0 2 0 0 0 0.2 0.2 0 0.2 0 0 0 0.2 0</float_array>
+      <technique_common><accessor source="#post-pos-arr" count="8" stride="3"><param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/></accessor></technique_common></source>
+    <source id="post-nrm"><float_array id="post-nrm-arr" count="18">0 0 1 0 0 -1 0 -1 0 1 0 0 0 1 0 -1 0 0</float_array>
+      <technique_common><accessor source="#post-nrm-arr" count="6" stride="3"><param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/></accessor></technique_common></source>
+    <vertices id="post-vtx"><input semantic="POSITION" source="#post-pos"/></vertices>
+    <triangles material="yellow-sym" count="12">
+      <input semantic="VERTEX" source="#post-vtx" offset="0"/>
+      <input semantic="NORMAL" source="#post-nrm" offset="1"/>
+      <p>0 0 1 0 2 0 1 0 0 0 3 0 4 1 5 1 6 1 5 1 4 1 7 1 4 2 1 2 3 2 1 2 4 2 6 2 1 3 5 3 2 3 5 3 1 3 6 3 5 4 0 4 2 4 0 4 5 4 7 4 4 5 0 5 7 5 0 5 4 5 3 5</p></triangles>
+  </mesh></geometry></library_geometries>
+  <library_visual_scenes><visual_scene id="Scene" name="Scene"><node id="post" name="post">
+    <instance_geometry url="#post-mesh"><bind_material><technique_common>
+      <instance_material symbol="yellow-sym" target="#yellow-mat"/>
+    </technique_common></bind_material></instance_geometry></node></visual_scene></library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

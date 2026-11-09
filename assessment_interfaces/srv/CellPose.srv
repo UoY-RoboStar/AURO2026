@@ -1,0 +1,11 @@
+# Centre of a cell in the reactor or the storage pool (served by assessment's reactor_monitor).
+#
+# Cells are indexed by a column letter, west to east, and a row number, north to south: A0 is the
+# north-west cell of the reactor, M8 its south-east cell; N0 to Z8 are the storage pool.
+string cell                    # e.g. "C4" (case-insensitive)
+---
+bool success                   # false if there is no such cell
+geometry_msgs/Point centre     # centre of the cell's top opening, in the world frame. The crane is
+                               # at the world origin, so x and y are also the bridge_slide and
+                               # winch_block_slide joint positions that put the winch above it.
+string area                    # "reactor" or "storage"

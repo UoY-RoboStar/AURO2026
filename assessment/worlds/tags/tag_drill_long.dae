@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><contributor><authoring_tool>ArUco DICT_4X4_50 id 4 = drill_long</authoring_tool></contributor>
+    <created>2026-11-06T00:00:00</created><modified>2026-11-06T00:00:00</modified>
+    <unit name="meter" meter="1"/><up_axis>Z_UP</up_axis></asset>
+  <library_images><image id="tag_drill_long-img" name="tag_drill_long"><init_from>tag_drill_long.png</init_from></image></library_images>
+  <library_effects><effect id="tag_drill_long-fx"><profile_COMMON>
+    <newparam sid="tag_drill_long-surface"><surface type="2D"><init_from>tag_drill_long-img</init_from></surface></newparam>
+    <newparam sid="tag_drill_long-sampler"><sampler2D><source>tag_drill_long-surface</source><wrap_s>CLAMP_TO_EDGE</wrap_s><wrap_t>CLAMP_TO_EDGE</wrap_t><minfilter>LINEAR_MIPMAP_LINEAR</minfilter><magfilter>LINEAR</magfilter></sampler2D></newparam>
+    <technique sid="common"><lambert>
+      <diffuse><texture texture="tag_drill_long-sampler" texcoord="UVMap"/></diffuse>
+    </lambert></technique></profile_COMMON></effect></library_effects>
+  <library_materials><material id="tag_drill_long-mat" name="tag_drill_long"><instance_effect url="#tag_drill_long-fx"/></material></library_materials>
+  <library_geometries><geometry id="tag_drill_long-mesh" name="tag_drill_long"><mesh>
+    <source id="tag_drill_long-pos"><float_array id="tag_drill_long-pos-arr" count="24">0 -0.15 -0.18 0 0.15 -0.18 0 0.15 0.18 0 -0.15 0.18 -0.01 -0.15 0.18 -0.01 0.15 0.18 -0.01 0.15 -0.18 -0.01 -0.15 -0.18</float_array><technique_common><accessor source="#tag_drill_long-pos-arr" count="8" stride="3"><param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/></accessor></technique_common></source>
+    <source id="tag_drill_long-nrm"><float_array id="tag_drill_long-nrm-arr" count="18">1 0 0 -1 0 0 0 0 -1 0 0 1 0 1 0 0 -1 0</float_array><technique_common><accessor source="#tag_drill_long-nrm-arr" count="6" stride="3"><param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/></accessor></technique_common></source>
+    <source id="tag_drill_long-uv"><float_array id="tag_drill_long-uv-arr" count="10">0 0 1 0 1 1 0 1 0.012 0.988</float_array><technique_common><accessor source="#tag_drill_long-uv-arr" count="5" stride="2"><param name="S" type="float"/><param name="T" type="float"/></accessor></technique_common></source>
+    <vertices id="tag_drill_long-vtx"><input semantic="POSITION" source="#tag_drill_long-pos"/></vertices>
+    <triangles material="tag_drill_long-sym" count="12">
+      <input semantic="VERTEX" source="#tag_drill_long-vtx" offset="0"/>
+      <input semantic="NORMAL" source="#tag_drill_long-nrm" offset="1"/>
+      <input semantic="TEXCOORD" source="#tag_drill_long-uv" offset="2" set="0"/>
+      <p>0 0 0 1 0 1 2 0 2 0 0 0 2 0 2 3 0 3 4 1 4 5 1 4 6 1 4 4 1 4 6 1 4 7 1 4 0 2 4 7 2 4 6 2 4 0 2 4 6 2 4 1 2 4 3 3 4 2 3 4 5 3 4 3 3 4 5 3 4 4 3 4 1 4 4 6 4 4 5 4 4 1 4 4 5 4 4 2 4 4 0 5 4 3 5 4 4 5 4 0 5 4 4 5 4 7 5 4</p></triangles>
+  </mesh></geometry></library_geometries>
+  <library_visual_scenes><visual_scene id="Scene" name="Scene"><node id="tag_drill_long" name="tag_drill_long">
+    <instance_geometry url="#tag_drill_long-mesh"><bind_material><technique_common>
+      <instance_material symbol="tag_drill_long-sym" target="#tag_drill_long-mat"><bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/></instance_material>
+    </technique_common></bind_material></instance_geometry></node></visual_scene></library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

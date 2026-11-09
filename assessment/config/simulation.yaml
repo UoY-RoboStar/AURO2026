@@ -1,0 +1,17 @@
+# Settings of the simulation, mostly for task1. These are deliberately not launch arguments: they
+# define the robot and the world the task is assessed on. Nothing else needs changing with them.
+
+robot_start_pose: {x: 0.0, y: -3.5, yaw: 0.0}
+lidar_range: 5.5
+max_speed: 0.8
+odometry_source: encoder
+set_initial_pose: false
+level_pool_rim: false
+collect_distance: 0.5
+target_end_effector: suction_cup
+randomise_end_effectors: true
+aruco_tag_height: 0.28
+crane_effort_limits:
+  bridge_slide: 50000
+  winch_block_slide: 20000
+  winch_lift: 10000

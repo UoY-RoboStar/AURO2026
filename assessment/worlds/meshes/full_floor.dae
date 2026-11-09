@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><contributor><authoring_tool>floor from floor.scad env(), metres, 0.2 m per SCAD unit</authoring_tool></contributor>
+    <created>2026-09-16T00:00:00</created><modified>2026-09-16T00:00:00</modified>
+    <unit name="meter" meter="1"/><up_axis>Z_UP</up_axis></asset>
+  <library_images><image id="concrete-img" name="concrete"><init_from>concrete_tileable.jpg</init_from></image></library_images>
+  <library_effects><effect id="concrete-fx"><profile_COMMON>
+    <newparam sid="concrete-surface"><surface type="2D"><init_from>concrete-img</init_from></surface></newparam>
+    <newparam sid="concrete-sampler"><sampler2D><source>concrete-surface</source><wrap_s>WRAP</wrap_s><wrap_t>WRAP</wrap_t><minfilter>LINEAR_MIPMAP_LINEAR</minfilter><magfilter>LINEAR</magfilter></sampler2D></newparam>
+    <technique sid="common"><lambert>
+      <diffuse><texture texture="concrete-sampler" texcoord="UVMap"/></diffuse>
+    </lambert></technique></profile_COMMON></effect></library_effects>
+  <library_materials><material id="concrete-mat" name="concrete"><instance_effect url="#concrete-fx"/></material></library_materials>
+  <library_geometries><geometry id="full_floor-mesh" name="full_floor"><mesh>
+    <source id="full_floor-pos"><float_array id="full_floor-pos-arr" count="24">-29.5 25.4 0.1 29.5 -25.4 0.1 29.5 25.4 0.1 -29.5 -25.4 0.1 -29.5 -25.4 -0.1 29.5 25.4 -0.1 29.5 -25.4 -0.1 -29.5 25.4 -0.1</float_array><technique_common><accessor source="#full_floor-pos-arr" count="8" stride="3"><param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/></accessor></technique_common></source>
+    <source id="full_floor-nrm"><float_array id="full_floor-nrm-arr" count="18">0 0 1 0 0 -1 0 -1 0 1 0 0 0 1 0 -1 0 0</float_array><technique_common><accessor source="#full_floor-nrm-arr" count="6" stride="3"><param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/></accessor></technique_common></source>
+    <source id="full_floor-uv"><float_array id="full_floor-uv-arr" count="24">-19.6667 25.2866 19.6667 -25.2866 19.6667 25.2866 -19.6667 -25.2866 -19.6667 -0.099554 19.6667 0.099554 -19.6667 0.099554 19.6667 -0.099554 -16.9333 0.099554 16.9333 -0.099554 16.9333 0.099554 -16.9333 -0.099554</float_array><technique_common><accessor source="#full_floor-uv-arr" count="12" stride="2"><param name="S" type="float"/><param name="T" type="float"/></accessor></technique_common></source>
+    <vertices id="full_floor-vtx"><input semantic="POSITION" source="#full_floor-pos"/></vertices>
+    <triangles material="concrete-sym" count="12">
+      <input semantic="VERTEX" source="#full_floor-vtx" offset="0"/>
+      <input semantic="NORMAL" source="#full_floor-nrm" offset="1"/>
+      <input semantic="TEXCOORD" source="#full_floor-uv" offset="2" set="0"/>
+      <p>0 0 0 1 0 1 2 0 2 1 0 1 0 0 0 3 0 3 4 1 1 5 1 0 6 1 3 5 1 0 4 1 1 7 1 2 4 2 4 1 2 5 3 2 6 1 2 5 4 2 4 6 2 7 1 3 8 5 3 9 2 3 10 5 3 9 1 3 8 6 3 11 5 4 4 0 4 5 2 4 6 0 4 5 5 4 4 7 4 7 4 5 9 0 5 8 7 5 11 0 5 8 4 5 9 3 5 10</p></triangles>
+  </mesh></geometry></library_geometries>
+  <library_visual_scenes><visual_scene id="Scene" name="Scene"><node id="full_floor-mesh" name=" full_floor">
+    <instance_geometry url="#full_floor-mesh"><bind_material><technique_common>
+      <instance_material symbol="concrete-sym" target="#concrete-mat"><bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/></instance_material>
+    </technique_common></bind_material></instance_geometry></node></visual_scene></library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

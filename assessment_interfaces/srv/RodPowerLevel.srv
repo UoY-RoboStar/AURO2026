@@ -1,0 +1,4 @@
+# Power level of the fuel rod directly below the winch (served by assessment's reactor_monitor).
+---
+bool success         # false if no fuel rod is close enough below the winch
+float64 power_level  # percent (0-100); only meaningful if success is true

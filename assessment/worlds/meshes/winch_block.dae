@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><contributor><authoring_tool>winch_block.stl (OpenSCAD), 50 units = 10 m</authoring_tool></contributor>
+    <created>2026-10-09T00:00:00</created><modified>2026-10-09T00:00:00</modified>
+    <unit name="meter" meter="1"/><up_axis>Z_UP</up_axis></asset>
+  <library_images><image id="winch_block-img"><init_from>hazard_stripes.png</init_from></image></library_images>
+  <library_effects><effect id="winch_block-fx"><profile_COMMON>
+    <newparam sid="winch_block-surface"><surface type="2D"><init_from>winch_block-img</init_from></surface></newparam>
+    <newparam sid="winch_block-sampler"><sampler2D><source>winch_block-surface</source></sampler2D></newparam>
+    <technique sid="common"><phong>
+    <ambient><color sid="ambient">1 1 1 1</color></ambient>
+    <diffuse><texture texture="winch_block-sampler" texcoord="UVSET0"/></diffuse>
+    <specular><color sid="specular">0.2 0.2 0.2 1</color></specular>
+    <shininess><float sid="shininess">20</float></shininess>
+  </phong></technique></profile_COMMON></effect></library_effects>
+  <library_materials><material id="winch_block-mat" name="winch_block_material"><instance_effect url="#winch_block-fx"/></material></library_materials>
+  <library_geometries><geometry id="winch_block-mesh" name="winch_block"><mesh>
+    <source id="winch_block-pos"><float_array id="winch_block-pos-arr" count="24">-0.5 0.5 7.29 0.5 -0.5 7.29 0.5 0.5 7.29 -0.5 -0.5 7.29 -0.5 -0.5 6.79 0.5 0.5 6.79 0.5 -0.5 6.79 -0.5 0.5 6.79</float_array><technique_common><accessor source="#winch_block-pos-arr" count="8" stride="3"><param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/></accessor></technique_common></source>
+    <source id="winch_block-nrm"><float_array id="winch_block-nrm-arr" count="18">0 0 1 0 0 -1 0 -1 0 1 0 0 0 1 0 -1 0 0</float_array><technique_common><accessor source="#winch_block-nrm-arr" count="6" stride="3"><param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/></accessor></technique_common></source>
+    <source id="winch_block-uv"><float_array id="winch_block-uv-arr" count="16">-0.25 0.25 0.25 -0.25 0.25 0.25 -0.25 -0.25 -0.25 3.395 0.25 3.645 -0.25 3.645 0.25 3.395</float_array><technique_common><accessor source="#winch_block-uv-arr" count="8" stride="2"><param name="S" type="float"/><param name="T" type="float"/></accessor></technique_common></source>
+    <vertices id="winch_block-vtx"><input semantic="POSITION" source="#winch_block-pos"/></vertices>
+    <triangles material="winch_block-sym" count="12">
+      <input semantic="VERTEX" source="#winch_block-vtx" offset="0"/>
+      <input semantic="NORMAL" source="#winch_block-nrm" offset="1"/>
+      <input semantic="TEXCOORD" source="#winch_block-uv" offset="2" set="0"/>
+      <p>0 0 0 1 0 1 2 0 2 1 0 1 0 0 0 3 0 3 4 1 3 5 1 2 6 1 1 5 1 2 4 1 3 7 1 0 4 2 4 1 2 5 3 2 6 1 2 5 4 2 4 6 2 7 1 3 6 5 3 7 2 3 5 5 3 7 1 3 6 6 3 4 5 4 7 0 4 6 2 4 5 0 4 6 5 4 7 7 4 4 4 5 4 0 5 5 7 5 7 0 5 5 4 5 4 3 5 6</p></triangles>
+  </mesh></geometry></library_geometries>
+  <library_visual_scenes><visual_scene id="Scene" name="Scene"><node id="winch_block" name="winch_block">
+    <instance_geometry url="#winch_block-mesh"><bind_material><technique_common>
+      <instance_material symbol="winch_block-sym" target="#winch_block-mat"><bind_vertex_input semantic="UVSET0" input_semantic="TEXCOORD" input_set="0"/></instance_material>
+    </technique_common></bind_material></instance_geometry></node></visual_scene></library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

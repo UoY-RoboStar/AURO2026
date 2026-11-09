@@ -1,0 +1,29 @@
+# ros2_control of the crane, in task2: the parameters of the controller manager that the crane's
+# gz_ros2_control plugin runs (see assessment.world), and of its controller.
+#
+# effort_controller (forward_command_controller/ForwardCommandController) applies the efforts it
+# is sent to the crane's joints, as they are: there is no position control. Send
+# std_msgs/msg/Float64MultiArray on /crane/effort_controller/commands, one effort per joint in the
+# order of `joints` below, in newtons:
+#   bridge_slide       moves the bridge along x (-14.3 to 14.3 m)
+#   winch_block_slide  moves the trolley along y (-3.25 to 3.25 m)
+#   winch_lift         raises (+) or lowers (-) the winch (-6.385 to 0 m). Gravity
+#                      pulls the winch down (100 kg, 981 N) and whatever it holds. The winch's
+#                      brake is on from the start, and holds it whatever its effort: release it
+#                      (/crane/winch/brake/release) once the effort holds the winch up.
+# Each effort is held to its joint's limit, crane_effort_limits in config/simulation.yaml.
+# The last efforts sent stay applied until others are. The joints' positions and velocities are on
+# /crane/joint_states.
+/crane/controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz: once per physics step (0.01 s)
+    effort_controller:
+      type: forward_command_controller/ForwardCommandController
+
+/crane/effort_controller:
+  ros__parameters:
+    joints:
+      - bridge_slide
+      - winch_block_slide
+      - winch_lift
+    interface_name: effort

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><contributor><authoring_tool>room.stl (OpenSCAD), 50 units = 10 m</authoring_tool></contributor>
+    <created>2026-09-16T00:00:00</created><modified>2026-09-16T00:00:00</modified>
+    <unit name="meter" meter="1"/><up_axis>Z_UP</up_axis></asset>
+  <library_effects><effect id="room_blue-fx"><profile_COMMON><technique sid="common"><phong>
+    <ambient><color sid="ambient">0.2 0.35 0.9 1</color></ambient>
+    <diffuse><color sid="diffuse">0.2 0.35 0.9 1</color></diffuse>
+    <specular><color sid="specular">0.2 0.2 0.2 1</color></specular>
+    <shininess><float sid="shininess">20</float></shininess>
+  </phong></technique></profile_COMMON></effect></library_effects>
+  <library_materials><material id="room_blue-mat" name="room_blue_material"><instance_effect url="#room_blue-fx"/></material></library_materials>
+  <library_geometries><geometry id="room_blue-mesh" name="room_blue"><mesh>
+    <source id="room_blue-pos"><float_array id="room_blue-pos-arr" count="72">4.6 -4.6 0 4.6 4.6 4 4.6 4.6 0 4.6 -4.6 4 -4.6 -4.6 4 -4.6 4.6 0 -4.6 4.6 4 -4.6 -4.6 0 -1 -4.6 0 -1 -4.6 4 1 -4.6 4 1 -4.6 0 1 -5 0 1 -5 4 -1 -5 4 -1 -5 0 5 -5 4 5 5 0 5 5 4 5 -5 0 -5 5 4 -5 -5 4 -5 -5 0 -5 5 0</float_array><technique_common><accessor source="#room_blue-pos-arr" count="24" stride="3"><param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/></accessor></technique_common></source>
+    <source id="room_blue-nrm"><float_array id="room_blue-nrm-arr" count="18">-1 0 0 1 0 0 0 -1 0 0 1 0 0 0 1 0 0 -1</float_array><technique_common><accessor source="#room_blue-nrm-arr" count="6" stride="3"><param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/></accessor></technique_common></source>
+    <vertices id="room_blue-vtx"><input semantic="POSITION" source="#room_blue-pos"/></vertices>
+    <triangles material="room_blue-sym" count="44">
+      <input semantic="VERTEX" source="#room_blue-vtx" offset="0"/>
+      <input semantic="NORMAL" source="#room_blue-nrm" offset="1"/>
+      <p>0 0 1 0 2 0 1 0 0 0 3 0 4 1 5 1 6 1 5 1 4 1 7 1 5 2 1 2 6 2 1 2 5 2 2 2 8 3 4 3 9 3 4 3 8 3 7 3 0 3 10 3 3 3 10 3 0 3 11 3 12 0 10 0 11 0 10 0 12 0 13 0 14 1 8 1 9 1 8 1 14 1 15 1 16 1 17 1 18 1 17 1 16 1 19 1 18 4 1 4 16 4 18 4 6 4 1 4 6 4 20 4 4 4 20 4 6 4 18 4 3 4 16 4 1 4 13 4 3 4 10 4 3 4 13 4 16 4 4 4 14 4 9 4 4 4 21 4 14 4 21 4 4 4 20 4 15 5 7 5 8 5 7 5 22 5 5 5 22 5 7 5 15 5 19 5 0 5 17 5 12 5 0 5 19 5 0 5 12 5 11 5 2 5 17 5 0 5 5 5 17 5 2 5 5 5 23 5 17 5 23 5 5 5 22 5 22 0 20 0 23 0 20 0 22 0 21 0 17 3 20 3 18 3 20 3 17 3 23 3 22 2 14 2 21 2 14 2 22 2 15 2 12 2 16 2 13 2 16 2 12 2 19 2</p></triangles>
+  </mesh></geometry></library_geometries>
+  <library_visual_scenes><visual_scene id="Scene" name="Scene"><node id="room_blue" name="room_blue">
+    <instance_geometry url="#room_blue-mesh"><bind_material><technique_common>
+      <instance_material symbol="room_blue-sym" target="#room_blue-mat"/>
+    </technique_common></bind_material></instance_geometry></node></visual_scene></library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>
