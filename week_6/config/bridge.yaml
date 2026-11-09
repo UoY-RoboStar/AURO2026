@@ -1,0 +1,7 @@
+# Ground truth from the OdometryPublisher system added in week_6/robot_model.py. Everything else
+# (/odom, /tf, /cmd_vel, /scan, /clock, ...) comes through turtlebot3_gazebo's own bridge file.
+- ros_topic_name: odom_world
+  gz_topic_name: odom_world
+  ros_type_name: nav_msgs/msg/Odometry
+  gz_type_name: gz.msgs.Odometry
+  direction: GZ_TO_ROS

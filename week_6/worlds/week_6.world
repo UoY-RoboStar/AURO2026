@@ -1,0 +1,148 @@
+<?xml version='1.0'?>
+<sdf version='1.8'>
+<world name="week_6">
+
+  <physics type="ode">
+    <max_step_size>0.01</max_step_size>
+    <real_time_factor>1</real_time_factor>
+  </physics>
+
+  <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+  <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+  <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+  <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+    <render_engine>ogre2</render_engine>
+  </plugin>
+  <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu"/>
+
+  <light type="directional" name="sun">
+    <cast_shadows>true</cast_shadows>
+    <pose>0 0 10 0 0 0</pose>
+    <diffuse>0.8 0.8 0.8 1</diffuse>
+    <specular>0.2 0.2 0.2 1</specular>
+    <direction>-0.5 0.1 -0.9</direction>
+  </light>
+
+  <model name="ground_plane">
+    <static>true</static>
+    <link name="link">
+      <collision name="collision">
+        <geometry><plane><normal>0 0 1</normal><size>100 100</size></plane></geometry>
+      </collision>
+      <visual name="visual">
+        <geometry><plane><normal>0 0 1</normal><size>100 100</size></plane></geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <model name='arena'>
+    <pose>0 0 0 0 0 0</pose>
+    <link name='Wall_1'>
+      <collision name='Wall_1_Collision'>
+        <geometry>
+          <box>
+            <size>5 0.15 0.5</size>
+          </box>
+        </geometry>
+        <pose>0 0 0.25 0 -0 0</pose>
+      </collision>
+      <visual name='Wall_1_Visual'>
+        <pose>0 0 0.25 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>5 0.15 0.5</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1 1 0 1</ambient>
+          <diffuse>1 1 0 1</diffuse>
+          <specular>0 0 0 0</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <pose>-2.425 0 0 0 -0 1.5708</pose>
+    </link>
+    <link name='Wall_2'>
+      <collision name='Wall_2_Collision'>
+        <geometry>
+          <box>
+            <size>5 0.15 0.5</size>
+          </box>
+        </geometry>
+        <pose>0 0 0.25 0 -0 0</pose>
+      </collision>
+      <visual name='Wall_2_Visual'>
+        <pose>0 0 0.25 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>5 0.15 0.5</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1 1 0 1</ambient>
+          <diffuse>1 1 0 1</diffuse>
+          <specular>0 0 0 0</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <pose>0 2.425 0 0 -0 0</pose>
+    </link>
+    <link name='Wall_3'>
+      <collision name='Wall_3_Collision'>
+        <geometry>
+          <box>
+            <size>5 0.15 0.5</size>
+          </box>
+        </geometry>
+        <pose>0 0 0.25 0 -0 0</pose>
+      </collision>
+      <visual name='Wall_3_Visual'>
+        <pose>0 0 0.25 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>5 0.15 0.5</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1 1 0 1</ambient>
+          <diffuse>1 1 0 1</diffuse>
+          <specular>0 0 0 0</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <pose>2.425 0 0 0 0 -1.5708</pose>
+    </link>
+    <link name='Wall_4'>
+      <collision name='Wall_4_Collision'>
+        <geometry>
+          <box>
+            <size>5 0.15 0.5</size>
+          </box>
+        </geometry>
+        <pose>0 0 0.25 0 -0 0</pose>
+      </collision>
+      <visual name='Wall_4_Visual'>
+        <pose>0 0 0.25 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>5 0.15 0.5</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1 1 0 1</ambient>
+          <diffuse>1 1 0 1</diffuse>
+          <specular>0 0 0 0</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <pose>0 -2.425 0 0 -0 3.14159</pose>
+    </link>
+    <static>true</static>
+  </model>
+
+</world>
+</sdf>
