@@ -1,0 +1,6 @@
+# An example service: the request, then ---, then the response.
+# Used as solution_interfaces.srv.Example in Python, after colcon build.
+string label
+---
+bool success
+geometry_msgs/Point point
