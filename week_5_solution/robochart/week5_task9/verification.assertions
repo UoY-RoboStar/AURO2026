@@ -1,0 +1,11 @@
+//
+// ctrl0 is the specification for a 1-place buffer, ie.
+// that can hold one value at a time.
+//
+// ctrl2 is now a valid implementation of ctrl0, so
+// the following assertion passes:
+assertion A1: ctrl2 refines ctrl0 in the traces model
+
+// Example of a generic verification to check that a
+// component, in this case ctrl2, is deadlock-free.
+assertion A2: ctrl2 is deadlock-free
